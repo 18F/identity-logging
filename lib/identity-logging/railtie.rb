@@ -1,5 +1,6 @@
 require 'lograge'
 require 'securerandom'
+require 'identity-logging/log_formatter'
 
 module IdentityLogging
   class Railtie < Rails::Railtie
