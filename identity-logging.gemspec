@@ -1,8 +1,8 @@
-require_relative 'lib/identity-logging/version'
+require_relative 'lib/identity/logging/version'
 
 Gem::Specification.new do |spec|
   spec.name          = "identity-logging"
-  spec.version       = IdentityLogging::VERSION
+  spec.version       = Identity::Logging::VERSION
   spec.authors       = ["Zach Margolis"]
   spec.email         = ["identity-devops@login.gov"]
 

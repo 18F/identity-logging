@@ -1,4 +1,6 @@
-RSpec.describe IdentityLogging::LogFormatter do
+require 'identity/logging/log_formatter'
+
+RSpec.describe Identity::Logging::LogFormatter do
   subject(:log_formatter) { described_class.new }
 
   describe '#call' do
@@ -15,7 +17,7 @@ RSpec.describe IdentityLogging::LogFormatter do
   end
 end
 
-RSpec.describe IdentityLogging::DevelopmentLogFormatter do
+RSpec.describe Identity::Logging::DevelopmentLogFormatter do
   subject(:log_formatter) { described_class.new }
 
   describe '#call' do

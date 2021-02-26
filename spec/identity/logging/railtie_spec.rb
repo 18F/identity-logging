@@ -1,9 +1,9 @@
 require 'rails'
 require 'timecop'
 require 'active_support/core_ext/time'
-require 'identity-logging/railtie'
+require 'identity/logging/railtie'
 
-RSpec.describe IdentityLogging::Railtie do
+RSpec.describe Identity::Logging::Railtie do
   around do |ex|
     zone = Time.zone
     Time.zone = ActiveSupport::TimeZone['UTC']
@@ -12,7 +12,7 @@ RSpec.describe IdentityLogging::Railtie do
   end
 
   describe 'config.lograge.custom_options' do
-    subject(:config) { IdentityLogging::Railtie.config }
+    subject(:config) { Identity::Logging::Railtie.config }
 
     let(:event) do
       ActiveSupport::Notifications::Event.new(

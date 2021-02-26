@@ -16,11 +16,11 @@ gem 'identity-logging', github: '18F/identity-logging'
 In your `application.rb`, add:
 
 ```ruby
-require 'identity-logging/railtie'
+require 'identity/logging/railtie'
 ```
 
 The gem adds some keys to the log payload, and removes ones that often contain sensitive values
-like `headers` and `params`, see [railtie.rb](lib/identity-logging/railtie.rb) for the specifis.
+like `headers` and `params`, see [railtie.rb](lib/identity/logging/railtie.rb) for the specifis.
 
 For apps that have user data, we recommend adding that into to the payload. lograge will
 automatically call `ApplicationController#append_info_to_payload` if it exists. Here's an example:
