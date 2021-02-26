@@ -1,0 +1,29 @@
+# Ruby CircleCI 2.0 configuration file
+#
+# Check https://circleci.com/docs/2.0/language-ruby/ for more details
+#
+version: 2.1
+
+commands:
+  bundle-install:
+    steps:
+      - run: gem update --system --no-document
+      - run: gem install bundler
+      - run:
+          name: Install dependencies
+          command: |
+            bundle check || bundle install --retry=3 --path vendor/bundle
+
+jobs:
+  build:
+    docker:
+      # Specify the Ruby version you desire here
+      - image: circleci/ruby:2.6.5
+
+    steps:
+      - checkout
+      - bundle-install
+      - run:
+          name: Run Tests
+          command: |
+            bundle exec rspec spec
