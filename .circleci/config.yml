@@ -18,7 +18,7 @@ jobs:
   build:
     docker:
       # Specify the Ruby version you desire here
-      - image: circleci/ruby:2.5.1
+      - image: circleci/ruby:2.6.5
 
     steps:
       - checkout
