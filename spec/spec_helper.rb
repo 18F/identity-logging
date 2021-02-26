@@ -1,5 +1,5 @@
 require "bundler/setup"
-require "identity/logging"
+require "identity-logging"
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure

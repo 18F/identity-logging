@@ -1,36 +1,43 @@
-# Identity::Logging
+# identity-logging
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/identity/logging`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
 
 ## Installation
 
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'identity-logging'
+gem 'identity-logging', github: '18F/identity-logging'
 ```
-
-And then execute:
-
-    $ bundle install
-
-Or install it yourself as:
-
-    $ gem install identity-logging
 
 ## Usage
 
-TODO: Write usage instructions here
+**The Railtie for logging (which sets up `lograge`) must be loaded explicitly**
 
-## Development
+In your `application.rb`, add:
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+```ruby
+require 'identity-logging/railtie'
+```
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+The gem adds some keys to the log payload, and removes ones that often contain sensitive values
+like `headers` and `params`, see [railtie.rb](lib/identity-logging/railtie.rb) for the specifis.
 
-## Contributing
+For apps that have user data, we recommend adding that into to the payload. lograge will
+automatically call `ApplicationController#append_info_to_payload` if it exists. Here's an example:
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/identity-logging.
+```ruby
+# application_controller.rb
 
+# for lograge
+def append_info_to_payload(payload)
+  payload[:user_id] = user.id # this depends on your application's user model
+end
+```
+
+To filter events out of logging if they're noisy, use `ignore_actions` like this:
+
+```ruby
+# config/environments/development.rb
+
+config.lograge.ignore_actions = ['Users::SessionsController#active']
+```
