@@ -3,6 +3,17 @@
 # Check https://circleci.com/docs/2.0/language-ruby/ for more details
 #
 version: 2
+
+commands:
+  bundle-install:
+    steps:
+      - run: gem update --system --no-document
+      - run: gem install bundler
+      - run:
+          name: Install dependencies
+          command: |
+            bundle check || bundle install --retry=3 --path vendor/bundle
+
 jobs:
   build:
     docker:
@@ -11,10 +22,7 @@ jobs:
 
     steps:
       - checkout
-      - run:
-          name: Install dependencies
-          command: |
-            bundle check || bundle install --retry=3 --path vendor/bundle
+      - bundle-install
       - run:
           name: Run Tests
           command: |
