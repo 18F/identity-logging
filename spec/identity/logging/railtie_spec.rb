@@ -57,7 +57,7 @@ RSpec.describe Identity::Logging::Railtie do
         controller: 'Users::SessionsController',
         action: 'new',
         path: '/',
-        timestamp: now.iso8601,
+        timestamp: now.iso8601(3),
         host: 'host.example.com',
         user_agent: 'Chrome 1234',
         trace_id: amzn_trace_id,
