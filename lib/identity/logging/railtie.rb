@@ -15,7 +15,7 @@ module Identity
       end
 
       config.lograge.custom_options = lambda do |event|
-        event.payload[:timestamp] = Time.zone.now.iso8601
+        event.payload[:timestamp] = Time.zone.now.iso8601(3)
         event.payload[:uuid] = SecureRandom.uuid
         event.payload[:pid] = Process.pid
         event.payload[:user_agent] = event.payload[:request].user_agent
