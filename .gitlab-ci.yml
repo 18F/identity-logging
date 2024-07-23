@@ -30,7 +30,6 @@ install_dependencies:
       policy: pull-push
   script:
     - *bundle_install
-    - make setup
 
 test_app:
   stage: test
